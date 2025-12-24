@@ -1,49 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Outfit Color Matcher</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<div class="card">
 
-  <div class="container">
-    <h1>🎨 Outfit Color Matcher</h1>
-    <p>Check if your outfit colors match.</p>
+  <!-- ROW 1 -->
+  <h2>🎯 Outfit Analyzer</h2>
+  <p>Upload or select colors to test your outfit</p>
 
-    <div class="card">
-      <label>Top Color</label>
-      <select id="topColor">
-        <option value="">Select</option>
-        <option>Black</option>
-        <option>White</option>
-        <option>Blue</option>
-        <option>Grey</option>
-        <option>Olive</option>
-        <option>Beige</option>
-        <option>Brown</option>
-      </select>
+  <label>Top Color</label>
+  <select id="topColor">
+    <option value="">Select</option>
+    <option>Black</option>
+    <option>White</option>
+    <option>Grey</option>
+    <option>Charcoal</option>
+    <option>Blue</option>
+    <option>Navy</option>
+    <option>Olive</option>
+    <option>Khaki</option>
+    <option>Beige</option>
+    <option>Cream</option>
+    <option>Brown</option>
+    <option>Maroon</option>
+    <option>Pastel Pink</option>
+    <option>Pastel Blue</option>
+  </select>
 
-      <label>Bottom Color</label>
-      <select id="bottomColor">
-        <option value="">Select</option>
-        <option>Black</option>
-        <option>White</option>
-        <option>Blue</option>
-        <option>Grey</option>
-        <option>Olive</option>
-        <option>Beige</option>
-        <option>Brown</option>
-      </select>
+  <label>Bottom Color</label>
+  <select id="bottomColor">
+    <option value="">Select</option>
+    <option>Black</option>
+    <option>White</option>
+    <option>Grey</option>
+    <option>Charcoal</option>
+    <option>Blue</option>
+    <option>Navy</option>
+    <option>Olive</option>
+    <option>Khaki</option>
+    <option>Beige</option>
+    <option>Cream</option>
+    <option>Brown</option>
+    <option>Maroon</option>
+    <option>Pastel Pink</option>
+    <option>Pastel Blue</option>
+  </select>
 
-      <button onclick="checkOutfit()">Check My Outfit</button>
-      <div id="result"></div>
-    </div>
+  <button onclick="checkOutfit()">Check My Outfit</button>
 
-    <footer>Built by Jyothik 🔥</footer>
-  </div>
+  <!-- ROW 2 -->
+  <div id="colorMatches"></div>
 
-  <script src="script.js"></script>
-</body>
-</html>
+  <!-- ROW 3 -->
+  <div id="shoeMatches"></div>
 
+</div>
+
+      
