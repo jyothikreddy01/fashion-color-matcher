@@ -1,27 +1,61 @@
 function checkOutfit() {
   const top = document.getElementById("topColor").value;
   const bottom = document.getElementById("bottomColor").value;
-  const result = document.getElementById("result");
+
+  const colorDiv = document.getElementById("colorMatches");
+  const shoeDiv = document.getElementById("shoeMatches");
 
   if (!top || !bottom) {
-    result.innerHTML = "⚠️ Select both colors.";
+    colorDiv.innerHTML = "⚠️ Please select both colors.";
+    shoeDiv.innerHTML = "";
     return;
   }
 
-  const rules = {
-    Black: ["White", "Grey", "Beige", "Olive", "Blue"],
-    White: ["Black", "Blue", "Brown", "Olive"],
-    Blue: ["White", "Grey", "Beige", "Black"],
-    Grey: ["Black", "White", "Blue"],
-    Olive: ["Black", "White", "Beige"],
-    Beige: ["Black", "Blue", "Brown"],
-    Brown: ["White", "Beige", "Blue"]
+  const colorRules = {
+    Black: ["White", "Grey", "Beige", "Cream", "Olive", "Khaki", "Blue", "Navy"],
+    White: ["Black", "Grey", "Blue", "Navy", "Brown", "Olive"],
+    Grey: ["Black", "White", "Blue", "Navy", "Maroon"],
+    Charcoal: ["White", "Beige", "Cream", "Blue"],
+    Blue: ["White", "Grey", "Beige", "Brown"],
+    Navy: ["White", "Beige", "Cream", "Grey"],
+    Olive: ["Black", "White", "Beige", "Cream"],
+    Khaki: ["Black", "White", "Navy", "Brown"],
+    Beige: ["Black", "Navy", "Brown", "Olive"],
+    Cream: ["Black", "Brown", "Navy"],
+    Brown: ["White", "Beige", "Blue"],
+    Maroon: ["White", "Grey", "Beige"],
+    "Pastel Pink": ["White", "Grey", "Blue"],
+    "Pastel Blue": ["White", "Grey", "Beige"]
   };
 
-  if (rules[top].includes(bottom)) {
-    result.innerHTML = `✅ Good match! ${top} + ${bottom} looks clean.`;
-  } else {
-    result.innerHTML = `❌ Not ideal. Try pairing ${top} with: ${rules[top].join(", ")}`;
-  }
-}
+  const shoeRules = {
+    Black: ["Black", "White", "Brown"],
+    White: ["White", "Beige", "Tan"],
+    Grey: ["White", "Black"],
+    Blue: ["White", "Brown"],
+    Navy: ["White", "Brown"],
+    Olive: ["White", "Brown"],
+    Khaki: ["White", "Brown"],
+    Beige: ["White", "Brown"],
+    Cream: ["Brown", "White"],
+    Maroon: ["Black", "Brown"]
+  };
 
+  // ROW 2 OUTPUT
+  const matches = colorRules[top] || [];
+  colorDiv.innerHTML = `
+    <h3>🎨 Best Color Matches</h3>
+    <ul>
+      ${matches.map(c => `<li>${c}</li>`).join("")}
+    </ul>
+  `;
+
+  // ROW 3 OUTPUT
+  const shoes = shoeRules[bottom] || ["White", "Black"];
+  shoeDiv.innerHTML = `
+    <h3>👟 Shoes That Match</h3>
+    <ul>
+      ${shoes.map(s => `<li>${s} shoes</li>`).join("")}
+    </ul>
+  `;
+}
