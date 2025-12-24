@@ -1,63 +1,100 @@
-function checkOutfit() {
-  const top = document.getElementById("topColor").value;
-  const bottom = document.getElementById("bottomColor").value;
+const colors = [
+  { name: "Black", hex: "#000000" },
+  { name: "White", hex: "#ffffff" },
+  { name: "Grey", hex: "#7d7d7d" },
+  { name: "Beige", hex: "#e6d3a3" },
+  { name: "Cream", hex: "#f4ecd8" },
+  { name: "Navy", hex: "#0a1f44" },
+  { name: "Denim Blue", hex: "#3b5b92" },
+  { name: "Olive", hex: "#556b2f" },
+  { name: "Sage", hex: "#9caf88" },
+  { name: "Brown", hex: "#5a3a1b" },
+  { name: "Tan", hex: "#d2b48c" },
+  { name: "Maroon", hex: "#6b1f2b" },
+  { name: "Wine", hex: "#722f37" },
+  { name: "Rust", hex: "#b7410e" },
+  { name: "Pastel Pink", hex: "#f2b5d4" },
+  { name: "Lavender", hex: "#c4b7e2" },
+  { name: "Mustard", hex: "#d4a017" },
+  { name: "Peach", hex: "#f7c1a0" }
+];
 
-  const colorDiv = document.getElementById("colorMatches");
-  const shoeDiv = document.getElementById("shoeMatches");
+let topColor = "", bottomColor = "", shoeColor = "";
 
-  if (!top || !bottom) {
-    colorDiv.innerHTML = "⚠️ Please select both colors.";
-    shoeDiv.innerHTML = "";
+const neutrals = ["Black", "White", "Grey", "Beige", "Cream", "Navy", "Brown", "Tan"];
+
+function createColors(containerId, setter) {
+  const container = document.getElementById(containerId);
+
+  colors.forEach(c => {
+    const item = document.createElement("div");
+    item.className = "color-item";
+
+    const dot = document.createElement("div");
+    dot.className = "color-dot";
+    dot.style.background = c.hex;
+
+    const name = document.createElement("div");
+    name.className = "color-name";
+    name.innerText = c.name;
+
+    item.appendChild(dot);
+    item.appendChild(name);
+
+    item.onclick = () => {
+      [...container.children].forEach(i => i.classList.remove("active"));
+      item.classList.add("active");
+      setter(c.name);
+    };
+
+    container.appendChild(item);
+  });
+}
+
+createColors("topColors", c => topColor = c);
+createColors("bottomColors", c => bottomColor = c);
+createColors("shoeColors", c => shoeColor = c);
+
+function checkFit() {
+  const occasion = document.getElementById("occasion").value;
+  const result = document.getElementById("result");
+  const bestShoe = document.getElementById("bestShoe");
+
+  if (!topColor || !bottomColor || !shoeColor) {
+    result.innerHTML = "⚠️ Please select top, bottom and footwear colors.";
+    bestShoe.innerHTML = "";
     return;
   }
 
-  const colorRules = {
-    Black: ["White", "Grey", "Beige", "Cream", "Olive", "Khaki", "Blue", "Navy"],
-    White: ["Black", "Grey", "Blue", "Navy", "Brown", "Olive"],
-    Grey: ["Black", "White", "Blue", "Navy", "Maroon"],
-    Charcoal: ["White", "Beige", "Cream", "Blue"],
-    Blue: ["White", "Grey", "Beige", "Brown"],
-    Navy: ["White", "Beige", "Cream", "Grey"],
-    Olive: ["Black", "White", "Beige", "Cream"],
-    Khaki: ["Black", "White", "Navy", "Brown"],
-    Beige: ["Black", "Navy", "Brown", "Olive"],
-    Cream: ["Black", "Brown", "Navy"],
-    Brown: ["White", "Beige", "Blue"],
-    Maroon: ["White", "Grey", "Beige"],
-    "Pastel Pink": ["White", "Grey", "Blue"],
-    "Pastel Blue": ["White", "Grey", "Beige"]
-  };
+  let score = 0;
+  if (topColor === bottomColor) score++;
+  if (neutrals.includes(topColor) || neutrals.includes(bottomColor)) score += 2;
+  if (neutrals.includes(shoeColor)) score += 2;
 
-  const shoeRules = {
-    Black: ["Black", "White", "Brown"],
-    White: ["White", "Beige", "Tan"],
-    Grey: ["White", "Black"],
-    Blue: ["White", "Brown"],
-    Navy: ["White", "Brown"],
-    Olive: ["White", "Brown"],
-    Khaki: ["White", "Brown"],
-    Beige: ["White", "Brown"],
-    Cream: ["Brown", "White"],
-    Maroon: ["Black", "Brown"]
-  };
+  if (occasion === "party" && !neutrals.includes(topColor)) score++;
+  if (occasion === "casual") score++;
 
-  // ROW 2 OUTPUT
-  const matches = colorRules[top] || [];
-  colorDiv.innerHTML = `
-    <h3>🎨 Best Color Matches</h3>
-    <ul>
-      ${matches.map(c => `<li>${c}</li>`).join("")}
-    </ul>
+  let verdict =
+    score >= 5 ? "Excellent balance. Looks clean and stylish."
+    : score >= 3 ? "Good combination. Minor improvement possible."
+    : "Not ideal. Try neutral colors.";
+
+  const suggestedShoe =
+    occasion === "party" ? "Black"
+    : occasion === "date" ? "Brown or Tan"
+    : "White or Black";
+
+  result.innerHTML = `
+    <b>Outfit Verdict</b><br>
+    ${verdict}<br><br>
+    Top: ${topColor}<br>
+    Bottom: ${bottomColor}<br>
+    Shoes: ${shoeColor}
   `;
 
-  // ROW 3 OUTPUT
-  const shoes = shoeRules[bottom] || ["White", "Black"];
-  shoeDiv.innerHTML = `
-    <h3>👟 Shoes That Match</h3>
-    <ul>
-      ${shoes.map(s => `<li>${s} shoes</li>`).join("")}
-    </ul>
+  bestShoe.innerHTML = `
+    <br><b>Best Shoe Suggestion:</b> ${suggestedShoe}
   `;
 }
 
-
+   
