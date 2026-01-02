@@ -1,49 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Outfit Color Matcher</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <h1>Outfit Color Matcher</h1>
-  <p class="subtitle">Designed by Jyothik Reddy</p>
+<h1>Outfit Color Matcher</h1>
+<p class="subtitle">Designed by Jyothik Reddy</p>
 
-  <div class="container">
+<div class="container">
 
-    <div class="select-box">
-      <label>Top Color</label>
-      <select id="top">
-        <option value="">Select</option>
-        <option value="white">White</option>
-        <option value="black">Black</option>
-        <option value="grey">Grey</option>
-        <option value="beige">Beige</option>
-        <option value="navy">Navy</option>
-      </select>
-    </div>
+  <h3>Top Color</h3>
+  <div class="color-grid" id="topColors"></div>
 
-    <div class="select-box">
-      <label>Bottom Color</label>
-      <select id="bottom">
-        <option value="">Select</option>
-        <option value="blue">Blue Jeans</option>
-        <option value="black">Black</option>
-        <option value="grey">Grey</option>
-        <option value="beige">Beige / Khaki</option>
-      </select>
-    </div>
+  <h3>Bottom Color</h3>
+  <div class="color-grid" id="bottomColors"></div>
 
-    <button onclick="checkOutfit()">Check Outfit</button>
+  <button onclick="checkOutfit()">Check Outfit</button>
 
-    <div id="result"></div>
+  <div id="result"></div>
 
-    <p class="insta">@jyothikreddy._</p>
+  <p class="insta">@jyothikreddy._</p>
+</div>
 
-  </div>
-
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
-
