@@ -1,38 +1,46 @@
 body {
-  font-family: Arial, sans-serif;
-  background: #ffffff;
-  color: #000000;
+  font-family: system-ui, sans-serif;
+  background: #fff;
+  color: #000;
   text-align: center;
 }
 
 h1 {
-  margin-top: 30px;
-  font-size: 32px;
+  margin-top: 25px;
 }
 
 .subtitle {
-  color: #555;
-  margin-bottom: 30px;
+  color: #666;
+  margin-bottom: 20px;
 }
 
 .container {
-  width: 320px;
+  width: 360px;
   margin: auto;
 }
 
-.select-box {
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
   margin-bottom: 20px;
-  text-align: left;
 }
 
-label {
-  font-weight: bold;
+.color-card {
+  border: 1px solid #ddd;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 8px;
+  font-size: 11px;
 }
 
-select {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5px;
+.color-box {
+  height: 35px;
+  border-radius: 6px;
+}
+
+.color-card.selected {
+  outline: 3px solid black;
 }
 
 button {
@@ -47,14 +55,12 @@ button {
 
 #result {
   margin-top: 25px;
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
 .insta {
   margin-top: 30px;
   font-size: 14px;
-  color: #666;
+  color: #777;
 }
-
-
